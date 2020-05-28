@@ -1,0 +1,46 @@
+<ion-header>
+    <ion-toolbar color="dark" *ngIf="reviewer">
+        <ion-buttons slot="start">
+            <ion-button [routerLink]="['/folder/' + reviewer.data.category_id]"
+                ><ion-icon name="caret-back-circle"></ion-icon
+            ></ion-button>
+        </ion-buttons>
+
+        <ion-title>{{reviewer.data.title}}</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+    <ion-spinner *ngIf="!reviewer" class="ion-padding"></ion-spinner>
+
+    <div class="container" *ngIf="reviewer">
+        <h3>{{reviewer.data.title}}</h3>
+    </div>
+    <div
+        class="container"
+        *ngIf="reviewer"
+        [innerHTML]="reviewer.data.description"
+    ></div>
+
+    <ion-fab
+        vertical="bottom"
+        horizontal="end"
+        slot="fixed"
+        *ngIf="reviewer && logged == true"
+    >
+        <ion-fab-button>
+            <ion-icon name="settings"></ion-icon>
+        </ion-fab-button>
+        <ion-fab-list side="start">
+            <ion-fab-button
+                color="primary"
+                [routerLink]="['/reviewer/add/' + reviewer.data.category_id + '/' +  reviewer.data.id ]"
+            >
+                <ion-icon name="create-outline"></ion-icon>
+            </ion-fab-button>
+            <ion-fab-button color="danger" (click)="presentAlertConfirm()"
+                ><ion-icon name="trash"></ion-icon
+            ></ion-fab-button>
+        </ion-fab-list>
+    </ion-fab>
+</ion-content>

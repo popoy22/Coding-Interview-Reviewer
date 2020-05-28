@@ -1,0 +1,48 @@
+<ion-header>
+    <ion-toolbar color="dark">
+        <ion-buttons slot="start">
+            <ion-back-button></ion-back-button>
+        </ion-buttons>
+        <ion-title style="color:#cfb27c">Login</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-grid class="mt-2">
+        <ion-row>
+            <ion-col size-lg="6" offset-lg="3" class="ion-margin-top">
+                <form
+                    class="text-center p-2"
+                    #f="ngForm"
+                    (ngSubmit)="onSubmit(f)"
+                >
+                    <ion-list lines="full">
+                        <ion-item>
+                            <ion-label position="stacked">Email</ion-label>
+                            <ion-input
+                                type="email"
+                                name="name"
+                                ngModel
+                                required
+                                autocomplete="username"
+                            ></ion-input>
+                        </ion-item>
+                        <ion-item>
+                            <ion-label position="stacked">Password</ion-label>
+                            <ion-input
+                                type="password"
+                                name="password"
+                                ngModel
+                                required
+                                autocomplete="current-password"
+                            ></ion-input>
+                        </ion-item>
+                    </ion-list>
+                    <ion-button type="submit" expand="full"
+                        >{{buttonLabel}}</ion-button
+                    >
+                </form>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>

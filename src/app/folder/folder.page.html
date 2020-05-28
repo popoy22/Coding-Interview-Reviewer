@@ -1,0 +1,49 @@
+<ion-header>
+    <ion-toolbar color="primary" *ngIf="category" [myScrollVanish]="scrollArea">
+        <ion-buttons slot="start">
+            <ion-menu-button style="color:#cfb27c"></ion-menu-button>
+        </ion-buttons>
+        <ion-searchbar
+            [(ngModel)]="title"
+            (ngModelChange)="keyDown($event)"
+            placeholder="Search in {{ category.data.name }} "
+        ></ion-searchbar>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content #scrollArea scrollEvents="true">
+    <ion-spinner *ngIf="!reviewers" class="ion-padding"></ion-spinner>
+
+    <ion-list *ngIf="reviewers">
+        <ion-item
+            *ngFor="let r of reviewers.data | keyvalue : returnZero"
+            detail
+            [routerLink]="['detail/' + r.value.id]"
+        >
+            <ion-label class="ion-text-wrap">{{r.value.title}}</ion-label>
+        </ion-item>
+    </ion-list>
+
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+        <ion-fab-button>
+            <ion-icon name="settings"></ion-icon>
+        </ion-fab-button>
+        <ion-fab-list side="start" *ngIf="category && logged == true">
+            <ion-fab-button
+                color="primary"
+                [routerLink]="['/reviewer/add/' + category.data.id]"
+            >
+                <ion-icon name="add"></ion-icon>
+            </ion-fab-button>
+            <ion-fab-button color="primary" (click)="logout()"
+                ><ion-icon name="power"></ion-icon
+            ></ion-fab-button>
+        </ion-fab-list>
+
+        <ion-fab-list side="start" *ngIf="category && logged == false">
+            <ion-fab-button color="primary" [routerLink]="['/login']">
+                <ion-icon name="key"></ion-icon>
+            </ion-fab-button>
+        </ion-fab-list>
+    </ion-fab>
+</ion-content>

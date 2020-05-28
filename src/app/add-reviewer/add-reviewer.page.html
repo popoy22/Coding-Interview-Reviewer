@@ -1,0 +1,31 @@
+<ion-header>
+    <ion-toolbar color="dark">
+        <ion-buttons slot="start" *ngIf="!rid && id">
+            <ion-button [routerLink]="['/folder/' + id]"
+                ><ion-icon name="caret-back-circle"></ion-icon
+            ></ion-button>
+        </ion-buttons>
+
+        <ion-buttons slot="start" *ngIf="rid && reviewer">
+            <ion-button
+                [routerLink]="['/folder/' + reviewer.data.category_id + '/detail/ ' + rid ]"
+                ><ion-icon name="caret-back-circle"></ion-icon
+            ></ion-button>
+        </ion-buttons>
+
+        <ion-title>{{navTitle}}</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+    <ion-list>
+        <ion-item>
+            <ion-label position="stacked">Reviewer Title</ion-label>
+            <ion-input [(ngModel)]="title" required></ion-input>
+        </ion-item>
+    </ion-list>
+    <quill-editor [(ngModel)]="content"></quill-editor>
+    <ion-button (click)="add()" [disabled]="submitting"
+        >{{submitting ? 'Saving...' : 'Save'}}</ion-button
+    >
+</ion-content>

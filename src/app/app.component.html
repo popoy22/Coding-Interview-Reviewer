@@ -1,0 +1,38 @@
+<ion-app>
+    <ion-split-pane contentId="main-content">
+        <ion-menu contentId="main-content" type="overlay">
+            <ion-content>
+                <ion-icon
+                    src="assets/icon/coding.svg"
+                    style="width: 100px; height: 100px;"
+                ></ion-icon>
+                <ion-list id="inbox-list" *ngIf="categories">
+                    <ion-list-header>Programming Language</ion-list-header>
+                    <ion-note>Reviewers</ion-note>
+
+                    <ion-menu-toggle
+                        auto-hide="false"
+                        *ngFor="let c of categories.data | keyvalue: returnZero"
+                    >
+                        <ion-item
+                            routerDirection="root"
+                            detail
+                            [routerLink]="['folder/' + c.value.id]"
+                            lines="none"
+                        >
+                            <ion-label class="ion-text-wrap">{{
+                                c.value.name
+                            }}</ion-label>
+
+                            <ion-badge slot="end">{{
+                                c.value.count
+                            }}</ion-badge>
+                        </ion-item>
+                    </ion-menu-toggle>
+                </ion-list>
+            </ion-content>
+            <h2 style="color:#222428;">Take a rest, don’t give up!</h2>
+        </ion-menu>
+        <ion-router-outlet id="main-content"></ion-router-outlet>
+    </ion-split-pane>
+</ion-app>
